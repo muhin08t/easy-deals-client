@@ -9,7 +9,7 @@ const Home = () => {
 
   // Load JSON Data
   useEffect(() => {
-    fetch("books.json")
+    fetch("https://e-learning-server-nu.vercel.app/course")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);
@@ -20,14 +20,14 @@ const Home = () => {
   };
 
   books.map((book) => {
-    console.log(book.bookName);
-    console.log(book.author);
+    console.log(book.title);
+    console.log(book.duration);
   });
 
   return (
     <div>
 
-<div className="carousel w-full pt-0 bg-[#bbd5d6]">
+<div className="carousel w-full pt-0 bg-[#e51942]">
   <div id="item1" className="carousel-item w-full">
     <div className="banner-content-part lg:banner-content-part-lg"> 
     <h1 className="banner-content-first-title lg:text-2xl">Unlock a World of Stories</h1>
@@ -73,30 +73,13 @@ const Home = () => {
                 <figure>
                   <img
                     className="w-[250px] h-[120px]"
-                    src={item.image}
+                    src={item.img_url}
                     alt="Books"
                   />
                 </figure>
                 <div className="card-body items-center text-center px-1">
-                  <h2 className="card-title"> {item.bookName} </h2>
-                  <h3 className="font-semibold"> {item.author}</h3>
-                  <p>{item.category}</p>
-                  <p> Rating: {item.rating} </p>
-                  <div className="card-actions">
-                    {item.tags.map((tItem, tIndex) => {
-                      return (
-                        <div className="badge badge-outline p-3"> {tItem}</div>
-                      );
-                    })}
-                  </div>
-                  <div className="justify-center card-actions my-4">
-                    <button
-                      onClick={() => handleClick(index)}
-                      className="w-[120px] h-[40px] text-white text-center rounded-md bg-blue-600"
-                    >
-                      View details
-                    </button>
-                  </div>
+                  <h2 className="card-title"> {item.title} </h2>
+                  <h3 className="font-semibold"> {item.duration}</h3>
                 </div>
               </div>
             </div>

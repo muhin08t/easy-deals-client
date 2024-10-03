@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <div> 
- <div className="navbar bg-[#663399]">
+ <div className="navbar bg-[#bbd5d6]">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn text-white rounded-md btn-ghost lg:hidden">
@@ -26,28 +26,25 @@ const Navbar = () => {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <li> <Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/blog">Blog</Link></li>
-        <li><Link to="/faq">FAQ</Link></li>
+        <li><Link to="/about">Products</Link></li>
       </ul>
     </div>
     <div className="avatar ml-10">
   <div className="w-10 rounded-full">
-    <img src="/book-logo.png" alt='logo site' />
+    <img src="/logo-e-learning.png" alt='logo site' />
   </div>
+  <h1 className='text-[#5a55f5] text-xl ml-10 font-edu mt-1'>E-Learning</h1>
 </div>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-        <li className='text-white text-lg'> <Link to="/">Home</Link></li>
-        <li className='text-white text-lg'><Link to="/about">About</Link></li>
-        <li className='text-white text-lg'><Link to="/blog">Blog</Link></li>
-        <li className='text-white text-lg'><Link to="/faq">FAQ</Link></li>
+        <li className='text-black text-lg'> <Link to="/">Home</Link></li>
+        <li className='text-black text-lg'><Link to="/about">Products</Link></li>
     </ul>
   </div>
   <div className="navbar-end">
-    <button className='w-24 h-11 bg-[#eab676] rounded-md'>Buy book</button>
-    <button className='w-24 h-11 bg-[#eab676] rounded-md ml-5 mr-12'>Sign In</button>
+    <p className='text-black text-xs font-poppins'>Muhin Khan</p>
+    <button className='w-24 h-11 bg-[#f86a8d] text-white rounded-md ml-5 mr-12'>Login</button>
   </div>
 </div>
 
