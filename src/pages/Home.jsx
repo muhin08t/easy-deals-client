@@ -4,25 +4,20 @@ import BookDetails from "../components/BookDetails";
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const [books, setBooks] = useState([]);
+  const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
   // Load JSON Data
   useEffect(() => {
-    fetch("https://e-learning-server-nu.vercel.app/course")
+    fetch("https://e-learning-server-nu.vercel.app/products")
       .then((res) => res.json())
-      .then((data) => setBooks(data));
+      .then((data) => setProducts(data));
   }, []);
 
   const handleClick = (index) => {
     console.log("handle click called");
-    navigate('/bookdetails', { state: { book: books[index] } });
+    navigate('/bookdetails', { state: { book: products[index] } });
   };
-
-  books.map((book) => {
-    console.log(book.title);
-    console.log(book.duration);
-  });
 
   return (
     <div>
@@ -66,7 +61,7 @@ const Home = () => {
         <h1 className="text-4xl font-bold">Book List</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 m-10">
-        {books.map((item, index) => {
+        {products.map((item, index) => {
           return (
             <div key={index}>
               <div className="card mt-10 bg-base-100 w-96 shadow-xl md:w-80 lg:w-[350px] xl:w-96">
