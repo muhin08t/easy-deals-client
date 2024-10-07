@@ -4,3 +4,4 @@
     * React
     * React router dom
     * React API
+    * Firebase authentication

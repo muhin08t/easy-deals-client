@@ -29,7 +29,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-[#bbd5d6] py-5">
+      <div className="navbar bg-[#f8f9fa] py-5">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -70,7 +70,7 @@ const Navbar = () => {
               <img src="/logo-e-learning.png" alt="logo site" />
             </div>
           </div>
-          <h1 className="text-[#5a55f5] text-xl ml-10 font-edu mt-1">
+          <h1 className="text-[#000] text-xl ml-10 font-edu mt-1">
             E-Learning
           </h1>
         </div>

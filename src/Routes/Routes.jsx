@@ -12,6 +12,7 @@ import MainLayout from './../Layout/MainLayout';
 import LoginLayout from '../Layout/LoginLayout.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
 import Register from './../pages/Register';
+import Products from '../pages/Products.jsx';
 
 const routes = createBrowserRouter([
     {
@@ -24,7 +25,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/products',
-                element: <About />,
+                element: <Products />,
             },
             {
                 path: "/register",
