@@ -7,11 +7,11 @@ import {
     RouterProvider,
     createBrowserRouter
 } from 'react-router-dom'
-import Blog from '../pages/Blog.jsx';
-import Faq from '../pages/Faq.jsx';
-import BookDetails from '../components/BookDetails.jsx';
-import App from '../App.jsx';
+
 import MainLayout from './../Layout/MainLayout';
+import LoginLayout from '../Layout/LoginLayout.jsx';
+import LoginPage from '../pages/LoginPage.jsx';
+import Register from './../pages/Register';
 
 const routes = createBrowserRouter([
     {
@@ -27,11 +27,26 @@ const routes = createBrowserRouter([
                 element: <About />,
             },
             {
+                path: "/register",
+                element: <Register />,
+              },
+            {
               path: '/*',
               element: <Error />,
           },
         ]
-    }
+    } ,
+    {
+        path: "/login",
+        element: <LoginLayout />,
+        children: [
+          {
+            path: "/login",
+            element: <LoginPage />,
+          },
+
+        ],
+      },
 ]);
 
 export default routes;

@@ -86,12 +86,14 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <p className="text-black text-xs font-poppins">Muhin Khan</p>
-          <div className="avatar ml-5">
+          <p className="text-black text-xs font-poppins">{user?.displayName}</p>
+          {user  &&  (
+            <div className="avatar ml-5">
             <div className="w-10 rounded-full">
-              <img src="/logo-e-learning.png" alt="logo site" />
+              <img src= {user?.photoURL} alt="" />
             </div>
-          </div>
+          </div> ) 
+          }
           {user ? (
             <button
               onClick={() => {
@@ -102,14 +104,12 @@ const Navbar = () => {
               Logout
             </button>
           ) : (
-            <button
-              onClick={() => {
-                handleGoogleSignin();
-              }}
-              className="w-24 h-11 bg-[#f86a8d] text-white rounded-md ml-5 mr-12"
-            >
+            <Link to="/login">
+            <button className="w-24 h-11 bg-[#f86a8d] text-white rounded-md ml-5 mr-12" >
               Login
             </button>
+            </Link>
+
           )}
         </div>
       </div>
