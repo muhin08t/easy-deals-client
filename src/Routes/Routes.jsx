@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from '../pages/Home.jsx';
-import About from '../pages/About.jsx'
 import Error from '../pages/Error.jsx';
 import {
     RouterProvider,
@@ -13,6 +12,7 @@ import LoginLayout from '../Layout/LoginLayout.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
 import Register from './../pages/Register';
 import Products from '../pages/Products.jsx';
+import ProtectedRoute from './ProtectedRoute';
 
 const routes = createBrowserRouter([
     {
@@ -25,7 +25,12 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/products',
-                element: <Products />,
+                element:
+                (
+                  <ProtectedRoute>
+                    <Products />
+                  </ProtectedRoute>
+                ) ,
             },
             {
                 path: "/register",

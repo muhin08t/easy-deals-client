@@ -6,26 +6,9 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 const Navbar = () => {
   const { signIn, googleSignIn, githubSignIn, user, logOut } =
     useContext(AuthContext);
-  const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleGoogleSignin = () => {
-    console.log("hello click login");
-    googleSignIn(googleProvider)
-      .then((result) => {
-        console.log("hello google result");
-        console.log(result.user);
-        // toast.success("User Google Login Successful", {
-        //   position: "top-right",
-        // });
-        // navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <div>
