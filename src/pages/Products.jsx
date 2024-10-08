@@ -17,9 +17,9 @@ const Products = () => {
         });
     }, []);
   
-    const handleClick = (index) => {
-      console.log("handle click called");
-      navigate('/bookdetails', { state: { book: products[index] } });
+    const handleClick = (id) => {
+      console.log("handle click called "+id);
+      navigate(`/products/${id}`, { state: { id: id } });
     };
 
     return (
@@ -47,7 +47,12 @@ const Products = () => {
                   </figure>
                   <div className="card-body items-center text-center px-1">
                     <h2 className="card-title"> {item.title} </h2>
-                    <h3 className="font-semibold"> {item.duration}</h3>
+                    <button
+                      onClick={() => handleClick(item._id)}
+                      className="w-[120px] h-[40px] text-white text-center rounded-md bg-blue-600 ml-5 mt-3"
+                    >
+                      View Details
+                    </button>
                   </div>
                 </div>
               </div>

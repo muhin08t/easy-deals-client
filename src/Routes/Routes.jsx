@@ -13,6 +13,7 @@ import LoginPage from '../pages/LoginPage.jsx';
 import Register from './../pages/Register';
 import Products from '../pages/Products.jsx';
 import ProtectedRoute from './ProtectedRoute';
+import ProductDetails from './../pages/ProductDetails';
 
 const routes = createBrowserRouter([
     {
@@ -32,6 +33,15 @@ const routes = createBrowserRouter([
                   </ProtectedRoute>
                 ) ,
             },
+            {
+              path: '/products/:id',
+              element:
+              (
+                <ProtectedRoute>
+                  <ProductDetails />
+                </ProtectedRoute>
+              ) ,
+          },
             {
                 path: "/register",
                 element: <Register />,
