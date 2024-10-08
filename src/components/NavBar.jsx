@@ -22,7 +22,7 @@ const Navbar = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-5 w-5 bg-blue-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -48,12 +48,12 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <div className="avatar ml-10">
+          <div className="avatar ml-10 hidden md:block">
             <div className="w-10 rounded-full">
               <img src="/logo-e-learning.png" alt="logo site" />
             </div>
           </div>
-          <h1 className="text-[#000] text-xl ml-10 font-edu mt-1">
+          <h1 className="text-[#000] text-xl ml-10 font-edu mt-1 hidden sm:block">
             E-Learning
           </h1>
         </div>

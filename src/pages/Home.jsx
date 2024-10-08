@@ -36,7 +36,7 @@ const Home = () => {
         {products.map((item, index) => {
           return (
             <div key={index}>
-              <div className="card p-5 bg-base-100 shadow-xl md:w-80 lg:w-[350px] xl:w-[150px]">
+              <div className="card p-5 bg-base-100 shadow-xl w-64 md:w-80 lg:w-[150px]">
                 <figure>
                   <img
                     className="w-[130px] h-[130px]"
@@ -116,10 +116,10 @@ const Home = () => {
         <h1 className="text-4xl font-bold">About us</h1>
       </div>
 
-      <div className="flex justify-center mb-20 mt-10">
+      <div className="flex justify-center mb-20 mt-10 ml-6">
         <div className="mr-20">
         <img src="profile-about.jpg" alt="" className="" />
-        <h1 className="text-xl font-bold ml-10">CEO</h1>
+        <h1 className="text-xl font-bold ml-5 lg:ml-10">CEO</h1>
         </div>
       <p className="text-lg italic">Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br></br>
        Deleniti harum sit dignissimos! Deleniti corrupti, <br></br>

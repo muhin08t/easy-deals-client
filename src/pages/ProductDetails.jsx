@@ -32,7 +32,7 @@ const ProductDetails = () => {
         )}
 
         <div className="flex justify-center my-10 mx-5">
-          <div className="mx-5 w-52 md:w-72 lg:w-80 xl:w-96 xl:h-96 border-2 border-blue-500">
+          <div className="mx-5 w-52 h-52 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 border-2 border-blue-500">
             <img  src={products.img_url} />
           </div>
           <div className="flex-col w-[600px]">
