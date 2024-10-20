@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "react-practice-b7726",
   storageBucket: "react-practice-b7726.appspot.com",
   messagingSenderId: "759743084816",
-  appId: "1:759743084816:web:cc450c37e4a5ad24368d95"
+  appId: "1:759743084816:web:dae7cf67df6fc8ca368d95"
 };
 
 // Initialize Firebase

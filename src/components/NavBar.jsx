@@ -54,7 +54,7 @@ const Navbar = () => {
             </div>
           </div>
           <h1 className="text-[#000] text-xl ml-10 font-edu mt-1 hidden sm:block">
-            E-Learning
+            Easy deals
           </h1>
         </div>
         <div className="navbar-center hidden lg:flex">

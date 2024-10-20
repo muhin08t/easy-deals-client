@@ -18,14 +18,6 @@ const Home = () => {
       <div className="carousel w-full pt-0">
         <div id="item1" className="carousel-item w-screen relative">
           <img src="/banner2.jpg" className="w-screen h-[400px]" />
-          <div class="absolute top-1/2 flex items-center justify-end ml-5">
-            <div class="card bg-base-100 w-96 shadow-xl">
-              <div class="card-body">
-                <h2 class="card-title">Welcome to E-learning</h2>
-                <p>An online platfrom for learning technology</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
