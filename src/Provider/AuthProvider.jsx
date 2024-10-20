@@ -18,9 +18,50 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => {
+  const createUser = async (email,
+    password,
+    name,
+    phone,
+    photo,
+    address) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const newUser = userCredential.user;
+
+      // Send user data to backend
+      const response = await fetch(
+        "http://localhost:5000/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid: newUser.uid,
+            email: newUser.email,
+            displayName: name || "User",
+            phone: phone,
+            photoUrl: photo || "https://i.ibb.co/k6hTYW1/Alien-Dev.jpg",
+            address: address,
+            isAdmin: false, // Default role
+            isBlocked: false, // Default status
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to register user data.");
+      }
+      return newUser;
+    } catch (error) {
+      console.error("Registration failed:", error.message);
+      throw error; // Re-throw error for further handling if needed
+    }
   };
 
   const signIn = (email, password) => {

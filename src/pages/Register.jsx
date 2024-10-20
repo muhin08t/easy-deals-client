@@ -6,10 +6,10 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
 
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
   
-    const handleRegister = (event) => {
+    const handleRegister = async (event) => {
       event.preventDefault();
       // const name = event.target.name.value;
       // console.log(name);
@@ -19,29 +19,30 @@ const Register = () => {
   
       const name = form.get("name");
       const photo = form.get("photo");
+      const phone = form.get("phone");
+      const address = form.get("address");
       const email = form.get("email");
       const password = form.get("password");
       console.log(name, photo, email, password);
-  
-      createUser(email, password)
-        .then((result) => {
-          console.log(result.user);
-          handleUserProfile(name, photo);
-          toast.success("User Registration Successful", {
-            position: "top-right",
-          });
-          navigate("/login");
-        })
-        .catch((error) => {
-          console.log(error);
+
+      try {
+        await createUser(email, password, name, phone, photo, address);
+         handleUserProfile(name, photo);
+        toast.success("User Registration Successful", {
+          position: "top-right",
         });
+        navigate("/login");
+      } catch (err) {
+        setError(err.message); // Capture and display error message
+        console.error(err.message);
+      }
     };
   
     const handleUserProfile = (name, photo) => {
       const profile = { displayName: name, photoURL: photo };
   
       updateUserProfile(profile)
-        .then(() => {})
+        .then(() => {logOut();})
         .catch((error) => {
           console.log(error);
         });
@@ -101,6 +102,54 @@ const Register = () => {
                           type="text"
                           name="photo"
                           placeholder="Photo URL"
+                          autoComplete="on"
+                          required
+                        ></input>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="mb-2">
+                      <label
+                        className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                        htmlFor="photo"
+                      >
+                        Phone Number
+                      </label>
+                    </div>
+                    <div className="flex w-full rounded-lg pt-1">
+                      <div className="relative w-full">
+                        <input
+                          className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-none"
+                          id="phone"
+                          type="tel"
+                          name="phone"
+                          placeholder="Phone Number"
+                          autoComplete="on"
+                          required
+                        ></input>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="mb-2">
+                      <label
+                        className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                        htmlFor="photo"
+                      >
+                        Address
+                      </label>
+                    </div>
+                    <div className="flex w-full rounded-lg pt-1">
+                      <div className="relative w-full">
+                        <input
+                          className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-none"
+                          id="address"
+                          type="text"
+                          name="address"
+                          placeholder="Address"
                           autoComplete="on"
                           required
                         ></input>
