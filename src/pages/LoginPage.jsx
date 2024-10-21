@@ -30,7 +30,7 @@ const LoginPage = () => {
           toast.success("User Login Successful", {
             position: "top-right",
           });
-          navigate(location?.state ? location.state : "/");
+          navigate("/dashboard");
         })
         .catch((error) => {
           console.log(error);
@@ -142,7 +142,7 @@ const LoginPage = () => {
                       </span>
                     </button>
 
-                    <button
+                    {/* <button
                       onClick={handleGoogleSignin}
                       type="button"
                       className="btn btn-outline btn-error mt-2 rounded-none"
@@ -160,7 +160,8 @@ const LoginPage = () => {
                       <span className="flex items-center justify-center gap-1 font-medium py-1 px-2.5 text-base false">
                         Sign in with GitHub
                       </span>
-                    </button>
+                    </button> */}
+
                   </div>
                 </form>
                 <div className="min-w-[270px]">

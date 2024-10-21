@@ -14,6 +14,12 @@ import Register from './../pages/Register';
 import Products from '../pages/Products.jsx';
 import ProtectedRoute from './ProtectedRoute';
 import ProductDetails from './../pages/ProductDetails';
+import Profile from './../pages/dashboardPages/Profile';
+import AllUsers from './../pages/dashboardPages/AllUsers';
+import Messages from './../pages/dashboardPages/Messages';
+import MessageDetails from './../pages/dashboardPages/MessageDetails';
+import CreateMessage from '../pages/dashboardPages/CreateMessage.jsx';
+import DashboardLayout from './../Layout/DashboardLayout';
 
 const routes = createBrowserRouter([
     {
@@ -61,6 +67,36 @@ const routes = createBrowserRouter([
             element: <LoginPage />,
           },
 
+        ],
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: "",
+            element: <Profile />,
+          },
+          {
+            path: "allUsers",
+            element: <AllUsers />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "messages",
+            element: <Messages />,
+          },
+          {
+            path: "messages/:id",
+            element: <MessageDetails />,
+          },
+          {
+            path: "createMessage",
+            element: <CreateMessage />,
+          },
         ],
       },
 ]);

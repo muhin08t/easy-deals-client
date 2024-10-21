@@ -2,6 +2,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import { IoMdLogIn } from "react-icons/io";
+import {
+  FaUser,
+  FaUsers,
+  FaEnvelope,
+  FaSignOutAlt,
+  FaPenAlt,
+} from "react-icons/fa";
 
 const Navbar = () => {
   const { signIn, googleSignIn, githubSignIn, user, logOut } =
@@ -44,13 +52,13 @@ const Navbar = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/products">Products</Link>
+                <Link to="/products">All Products</Link>
               </li>
             </ul>
           </div>
           <div className="avatar ml-10 hidden md:block">
             <div className="w-10 rounded-full">
-              <img src="/logo-e-learning.png" alt="logo site" />
+              <img src="/logo3.png" alt="logo site" />
             </div>
           </div>
           <h1 className="text-[#000] text-xl ml-10 font-edu mt-1 hidden sm:block">
@@ -64,7 +72,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li className="text-black text-lg">
-              <Link to="/products">Products</Link>
+              <Link to="/products">All Products</Link>
             </li>
           </ul>
         </div>
@@ -82,15 +90,17 @@ const Navbar = () => {
               onClick={() => {
                 logOut();
               }}
-              className="w-24 h-11 bg-[#f86a8d] text-white rounded-md ml-5 mr-12"
+              className="font-semibold text-[#f86a8d] text-lg flex items-center justify-end gap-0 ml-5 mr-12"
             >
-              Logout
+             <FaSignOutAlt className="inline mr-2" />
+             Logout
             </button>
           ) : (
-            <Link to="/login">
-            <button className="w-24 h-11 bg-[#f86a8d] text-white rounded-md ml-5 mr-12" >
-              Login
-            </button>
+            <Link to="/login"
+            className="font-semibold text-[#f86a8d] text-lg flex items-center justify-end gap-1 ml-5 mr-12"
+            >
+              Login <IoMdLogIn />
+   
             </Link>
 
           )}
