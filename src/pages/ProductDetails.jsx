@@ -10,14 +10,25 @@ const ProductDetails = () => {
     const { id } = location.state || 0 ;
     console.log(id);
 
-        useEffect(() => {
-            fetch(`http://localhost:5000/products/${id}`)
-              .then((res) => res.json())
-              .then((data) => {
-                 setProduct(data)
-                 setLoading(false)
-                 console.log("product details "+data);
-              });
+          useEffect(() => {
+            const fetchProduct = async () => {
+              try {
+                const response = await fetch(`http://localhost:5000/products/${id}`);
+                if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setProduct(data);
+              } catch (error) {
+                console.error("Error fetching products:", error);
+                // Handle error state (optional)
+                setProduct({});
+              } finally {
+                setLoading(false); // Ensure loading is set to false even in case of error
+              }
+            };
+          
+            fetchProduct();
           }, []);
           
     return (
@@ -31,28 +42,32 @@ const ProductDetails = () => {
           </div>
         )}
 
-        <div className="flex justify-center my-10 mx-5">
-          <div className="mx-5 w-52 h-52 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 border-2 border-blue-500">
-            <img  src={product.image} />
+        <div className="flex justify-center items-center my-10 mx-5">
+          <div className="mx-5 w-52 h-52 border-2 border-blue-500">
+            <img src={product.image} />
           </div>
-          <div className="flex-col w-[600px]">
-          <h1 className="text-xl font-bold">{product.name}</h1>
-          <p className="italic pt-2">{product.details}</p>
-          <div className="flex justify-between">
-          <p className="pt-2 text-lg"><span><b>Lesson:</b> </span> {product.lession}</p>
-          <p className="pt-2 text-lg"><span><b>Student:</b> </span> {product.student}</p>
-          <p className="pt-2 text-lg"><span><b>Duration:</b> </span> {product.duration}</p>
-          </div>
-
-          <div className="flex justify-between">
-          <p className="pt-2 text-lg"><span><b>Price:</b> </span> {product.price}</p>
-          <p className="pt-2 text-lg"><span><b>Assessments:</b> </span> {product.assessments}</p>
-          <p className="pt-2 text-lg"><span><b>Author:</b> </span> {product.author}</p>
-            </div>
-            <div className="flex justify-between">
-            <p className="pt-2 text-lg"><span><b>Level:</b> </span> {product.level}</p>
-            <p className="pt-2 text-lg"><span><b>Ratings:</b> </span> {product.ratings}</p>
-                </div>
+          <div className="flex-col">
+            <h1 className="text-xl font-bold">{product.name}</h1>
+            <p className="pt-2 text-lg">
+              <span>
+                <b>Price:</b>{" "}
+              </span>{" "}
+              TK {product.price}
+            </p>
+            <p className="pt-2 text-lg">
+              <span>
+                <b>Ratings:</b>{" "}
+              </span>{" "}
+              {product.rating}
+            </p>
+            <button
+              onClick={() => {
+                handleClick(item.product_id);
+              }}
+              className="bg-green-500 hover:bg-green-700 text-white py-2 mt-5 px-4 rounded h-10"
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>
