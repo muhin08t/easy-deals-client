@@ -1,7 +1,6 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from './../Provider/AuthProvider';
-import { useContext } from "react";
 import {
   FaUser,
   FaUsers,
@@ -13,11 +12,22 @@ import {
 const DashboardSidebarContent = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
 
   const handleLogout = () => {
     logOut();
     navigate("/");
   };
+
+        // Load JSON Data
+        useEffect(() => {
+          fetch(`http://localhost:5000/user/${user.uid}`)
+            .then((res) => res.json())
+            .then((data) => {
+               setUserData(data);
+               console.log("users data "+data.displayName);
+            });
+        }, []);
 
   return (
     <div>
@@ -56,6 +66,7 @@ const DashboardSidebarContent = () => {
         {/* Profile Link */}
         <NavLink
           to="/dashboard/profile"
+          state={{ uid: user.uid }}
           className={({ isActive }) =>
             isActive ? "text-blue-600" : "text-gray-600 hover:text-blue-500"
           }
@@ -64,11 +75,11 @@ const DashboardSidebarContent = () => {
           Profile
         </NavLink>
 
-        {!user?.isBlocked && (
+        {!userData?.isBlocked && (
           <>
             {" "}
             {/* Admin Links */}
-            {user?.isAdmin && (
+            {userData?.isAdmin && (
               <>
                 <NavLink
                   to="/dashboard/allUsers"
@@ -95,7 +106,7 @@ const DashboardSidebarContent = () => {
               </>
             )}
             {/* User Links */}
-            {!user?.isAdmin && (
+            {!userData?.isAdmin && (
               <NavLink
                 to="/dashboard/messages"
                 className={({ isActive }) =>

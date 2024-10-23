@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { IoMdLogIn } from "react-icons/io";
+import { FaTachometerAlt } from 'react-icons/fa';
 import {
   FaUser,
   FaUsers,
@@ -77,24 +78,23 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <p className="text-black text-xs font-poppins">{user?.displayName}</p>
+          {/* <p className="text-black text-xs font-poppins">{user?.displayName}</p>
           {user  &&  (
             <div className="avatar ml-5">
             <div className="w-10 rounded-full">
               <img src= {user?.photoURL} alt="" />
             </div>
           </div> ) 
-          }
+          } */}
           {user ? (
-            <button
-              onClick={() => {
-                logOut();
-              }}
-              className="font-semibold text-[#f86a8d] text-lg flex items-center justify-end gap-0 ml-5 mr-12"
-            >
-             <FaSignOutAlt className="inline mr-2" />
-             Logout
-            </button>
+             <Link to="/dashboard"
+             state={{ uid: user.uid }}
+             className="font-semibold text-lg flex items-center justify-end gap-1 ml-5 mr-12"
+             >
+                 <FaTachometerAlt />
+                 Dashboard
+    
+             </Link>
           ) : (
             <Link to="/login"
             className="font-semibold text-[#f86a8d] text-lg flex items-center justify-end gap-1 ml-5 mr-12"

@@ -3,39 +3,41 @@ import { createContext, useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("courseDetails.json")
+    fetch("http://localhost:5000/categories")
       .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((data) => setCategories(data));
   }, []);
 
+  const handleClick = (cat_id) => {
+    console.log("handle click called "+cat_id);
+    navigate(`/category/products/${cat_id}`, { state: { cat_id: cat_id } });
+  };
 
   return (
     <div>
       <div className="carousel w-full pt-0">
         <div id="item1" className="carousel-item w-screen relative">
-          <img src="/banner2.jpg" className="w-screen h-[400px]" />
+          <img src="/banner5.jpg" className="w-screen h-[400px]" />
         </div>
       </div>
 
       <div className="text-center py-8">
-        <h1 className="text-4xl font-bold">Product List</h1>
+        <h1 className="text-4xl font-bold">Categories</h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 m-10">
-        {products.map((item, index) => {
+        {categories.map((item, index) => {
           return (
             <div key={index}>
-              <div className="card p-5 bg-base-100 shadow-xl w-64 md:w-80 lg:w-[150px]">
-                <figure>
-                  <img
-                    className="w-[130px] h-[130px]"
-                    src={item.img_url}
-                    alt="Products"
-                  />
-                </figure>
+              <div className="card w-80 h-72 bg-base-100 shadow-xl transition-transform duration-300 hover:scale-110">
+                <div className="card-body flex flex-col items-center">
+                  <h2 className="card-title text-center">{item.name}</h2>
+                  <img className="w-44 h-36" src={item.logo} alt="Categories" />
+                  <button onClick={() => {handleClick(item.cat_id)}} className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded h-10">View Products</button>
+                </div>
               </div>
             </div>
           );

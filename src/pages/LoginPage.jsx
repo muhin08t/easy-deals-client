@@ -30,7 +30,7 @@ const LoginPage = () => {
           toast.success("User Login Successful", {
             position: "top-right",
           });
-          navigate("/dashboard");
+          navigate("/dashboard", { state: { uid: result.user.uid } });
         })
         .catch((error) => {
           console.log(error);

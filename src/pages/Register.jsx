@@ -39,7 +39,7 @@ const Register = () => {
     };
   
     const handleUserProfile = (name, photo) => {
-      const profile = { displayName: name, photoURL: photo };
+      const profile = { displayName: name, photoURL: photo};
   
       updateUserProfile(profile)
         .then(() => {logOut();})

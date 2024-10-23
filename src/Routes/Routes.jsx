@@ -20,6 +20,7 @@ import Messages from './../pages/dashboardPages/Messages';
 import MessageDetails from './../pages/dashboardPages/MessageDetails';
 import CreateMessage from '../pages/dashboardPages/CreateMessage.jsx';
 import DashboardLayout from './../Layout/DashboardLayout';
+import CategoryBasedProducts from '../pages/CategoryBasedProducts.jsx';
 
 const routes = createBrowserRouter([
     {
@@ -48,6 +49,15 @@ const routes = createBrowserRouter([
                 </ProtectedRoute>
               ) ,
           },
+          {
+            path: '/category/products/:cat_id',
+            element:
+            (
+              <ProtectedRoute>
+                <CategoryBasedProducts />
+              </ProtectedRoute>
+            ) ,
+        },
             {
                 path: "/register",
                 element: <Register />,
