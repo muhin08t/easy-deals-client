@@ -18,10 +18,12 @@ const Home = () => {
         }
         const data = await response.json();
         setCategories(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);
         // Handle error state (optional)
         setCategories([]);
+        setLoading(false);
       } finally {
         setLoading(false); // Ensure loading is set to false even in case of error
       }
@@ -61,8 +63,8 @@ const Home = () => {
             <div key={index}>
               <div className="card w-80 h-72 bg-base-100 shadow-xl transition-transform duration-300 hover:scale-110">
                 <div className="card-body flex flex-col items-center">
-                  <h2 className="card-title text-center">{item.name}</h2>
-                  <img className="w-44 h-36" src={item.logo} alt="Categories" />
+                  <h2 className="card-title text-center">{item?.name}</h2>
+                  <img className="w-44 h-36" src={item?.logo} alt="Categories" />
                   <button onClick={() => {handleClick(item.cat_id)}} className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded h-10">View Products</button>
                 </div>
               </div>

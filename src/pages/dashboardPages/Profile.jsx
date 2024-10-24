@@ -7,6 +7,7 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [userData, setUserData] = useState({});
+  const [isLoading, setLoading] = useState(true);
   const location = useLocation();
   const { uid } = location.state || 0 ;
   console.log("user id "+uid);
@@ -16,18 +17,28 @@ const Profile = () => {
     photoURL: "",
     address: "",
   });
-      // Load JSON Data
+
       useEffect(() => {
-        fetch(`http://localhost:5000/user/${uid}`)
-          .then((res) => res.json())
-          .then((data) => {
-             setUserData(data);
-             console.log("users data "+data.displayName);
-            //  setProducts(data);
-            //  for(let i = 0; i<products.length;i++) {
-            //   console.log("name value "+products[i].displayName);
-            //  }
-          });
+        const fetchUserData = async () => {
+          try {
+            const response = await fetch(`https://easy-deals-server.onrender.com/user/${uid}`);
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            setUserData(data);
+            setLoading(false);
+          } catch (error) {
+            console.error("Error fetching products:", error);
+            // Handle error state (optional)
+            setUserData({});
+            setLoading(false);
+          } finally {
+            setLoading(false); // Ensure loading is set to false even in case of error
+          }
+        };
+      
+        fetchUserData();
       }, []);
 
   // Update user info
@@ -78,6 +89,15 @@ const Profile = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg relative">
+      {isLoading && (
+        <div className="mx-auto text-center mt-10">
+          <span className="loading loading-spinner loading-xs"></span>
+          <span className="loading loading-spinner loading-sm"></span>
+          <span className="loading loading-spinner loading-md"></span>
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
+
       <div className="flex flex-col items-center">
         <img
           src={userData?.photoUrl}

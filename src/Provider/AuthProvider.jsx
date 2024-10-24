@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
 
       // Send user data to backend
       const response = await fetch(
-        "http://localhost:5000/users",
+        "https://easy-deals-server.onrender.com/users",
         {
           method: "POST",
           headers: {

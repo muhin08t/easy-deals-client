@@ -11,16 +11,18 @@ const Products = () => {
     useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/products`);
+          const response = await fetch(`https://easy-deals-server.onrender.com/products`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const data = await response.json();
           setProducts(data);
+          setLoading(false);
         } catch (error) {
           console.error("Error fetching products:", error);
           // Handle error state (optional)
           setProducts([]);
+          setLoading(false);
         } finally {
           setLoading(false); // Ensure loading is set to false even in case of error
         }
@@ -55,7 +57,7 @@ const Products = () => {
                   <h2 className="card-title text-center whitespace-nowrap overflow-hidden text-ellipsis">{item.name}</h2>
                   <img
                     className="w-44 h-32"
-                    src={item.image}
+                    src={item?.image}
                     alt="Products"
                   />
           <div className="flex justify-between">
@@ -64,7 +66,7 @@ const Products = () => {
             </div>
                   <button
                     onClick={() => {
-                      handleClick(item.product_id);
+                      handleClick(item._id);
                     }}
                     className="bg-blue-500 hover:bg-blue-700 text-white py-2 mt-2 px-4 rounded h-10"
                   >

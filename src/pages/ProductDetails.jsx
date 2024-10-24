@@ -26,10 +26,12 @@ const ProductDetails = () => {
                 }
                 const data = await response.json();
                 setProduct(data);
+                setLoading(false);
               } catch (error) {
                 console.error("Error fetching products:", error);
                 // Handle error state (optional)
                 setProduct({});
+                setLoading(false);
               } finally {
                 setLoading(false); // Ensure loading is set to false even in case of error
               }

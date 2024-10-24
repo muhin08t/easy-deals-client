@@ -4,6 +4,7 @@ import { ImBlocked } from "react-icons/im";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isBlockModalOpen, setIsBlockModalOpen] = useState(false);
@@ -20,12 +21,14 @@ const AllUsers = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/users"
+        "https://easy-deals-server.onrender.com/users"
       );
       const data = await response.json();
       setUsers(data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching users:", error);
+      setLoading(false);
     }
   };
 
@@ -134,6 +137,15 @@ const AllUsers = () => {
 
   return (
     <div className="container mx-auto p-4">
+      {isLoading && (
+        <div className="mx-auto text-center mt-10">
+          <span className="loading loading-spinner loading-xs"></span>
+          <span className="loading loading-spinner loading-sm"></span>
+          <span className="loading loading-spinner loading-md"></span>
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
+
       <h2 className="text-2xl font-bold mb-4">Users List</h2>
       <table className="min-w-full bg-white border">
         <thead>

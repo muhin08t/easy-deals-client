@@ -24,7 +24,7 @@ const CreateMessage = () => {
     try {
       // const response = await fetch("http://localhost:5000/messages", {
       const response = await fetch(
-        "http://localhost:5000/messages",
+        "https://easy-deals-server.onrender.com/messages",
         {
           method: "POST",
           headers: {

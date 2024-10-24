@@ -13,16 +13,18 @@ const CategoryBasedProducts = () => {
       useEffect(() => {
         const fetchProducts = async () => {
           try {
-            const response = await fetch(`http://localhost:5000/category/products/${cat_id}`);
+            const response = await fetch(`https://easy-deals-server.onrender.com/category/products/${cat_id}`);
             if (!response.ok) {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
             setProducts(data);
+            setLoading(false);
           } catch (error) {
             console.error("Error fetching products:", error);
             // Handle error state (optional)
             setProducts([]);
+            setLoading(false);
           } finally {
             setLoading(false); // Ensure loading is set to false even in case of error
           }
@@ -60,12 +62,12 @@ const CategoryBasedProducts = () => {
                     alt="Products"
                   />
           <div className="flex justify-between">
-          <p className="pt-2 text-lg"><span><b>Price:</b> </span> TK {item.price}</p>
-          <p className="pt-2 text-lg ml-4"><span><b>Ratings:</b> </span> {item.rating}</p>
+          <p className="pt-2 text-lg"><span><b>Price:</b> </span> TK {item?.price}</p>
+          <p className="pt-2 text-lg ml-4"><span><b>Ratings:</b> </span> {item?.rating}</p>
             </div>
                   <button
                     onClick={() => {
-                      handleClick(item.product_id);
+                      handleClick(item._id);
                     }}
                     className="bg-blue-500 hover:bg-blue-700 text-white py-2 mt-2 px-4 rounded h-10"
                   >

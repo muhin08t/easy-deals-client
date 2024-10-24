@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Messages = () => {
     const [messages, setMessages] = useState([]);
+    const [isLoading, setLoading] = useState(true);
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -11,15 +12,17 @@ const Messages = () => {
         try {
           // const response = await fetch("http://localhost:5000/messages");
           const response = await fetch(
-            "http://localhost:5000/messages"
+            "https://easy-deals-server.onrender.com/messages"
           );
           if (!response.ok) {
             throw new Error("Failed to fetch messages");
           }
           const data = await response.json();
           setMessages(data);
+          setLoading(false);
         } catch (error) {
           console.error("Error fetching messages:", error);
+          setLoading(false);
         }
       };
   
@@ -30,7 +33,16 @@ const Messages = () => {
       navigate(`/dashboard/messages/${id}`);
     };
     return (
-        <div className="p-6 bg-white rounded-md shadow-lg">
+      <div className="p-6 bg-white rounded-md shadow-lg">
+        {isLoading && (
+          <div className="mx-auto text-center mt-10">
+            <span className="loading loading-spinner loading-xs"></span>
+            <span className="loading loading-spinner loading-sm"></span>
+            <span className="loading loading-spinner loading-md"></span>
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        )}
+
         <h2 className="text-2xl font-bold mb-4">Messages</h2>
         <hr />
         <table className="min-w-full bg-white">
