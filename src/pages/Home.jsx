@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
 
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:5000/categories");
+        const prodUrl = "https://easy-deals-server.onrender.com/categories";
+        const response = await fetch("https://easy-deals-server.onrender.com/categories");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -21,7 +23,7 @@ const Home = () => {
         // Handle error state (optional)
         setCategories([]);
       } finally {
-        
+        setLoading(false); // Ensure loading is set to false even in case of error
       }
     };
   
@@ -40,6 +42,15 @@ const Home = () => {
           <img src="/banner5.jpg" className="w-screen h-[400px]" />
         </div>
       </div>
+
+      {isLoading && (
+        <div className="mx-auto text-center mt-10">
+          <span className="loading loading-spinner loading-xs"></span>
+          <span className="loading loading-spinner loading-sm"></span>
+          <span className="loading loading-spinner loading-md"></span>
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
 
       <div className="text-center py-8">
         <h1 className="text-4xl font-bold">Categories</h1>
