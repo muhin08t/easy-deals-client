@@ -1,8 +1,6 @@
-# Server side code link: [https://github.com/devalienbrain/the-master-full-stack-project-client](https://github.com/devalienbrain/the-master-full-stack-project-server)
+# Server side code link: [https://github.com/muhin08t/easy-deals-server.git]
 
-# Client side Live deploy (Vercel) Link: [https://the-master-full-stack-project-client.vercel.app/
-
-](https://github.com/devalienbrain/the-master-full-stack-project-client)
+# Client side Live deploy (Render) Link: [https://easy-deals-server.onrender.com/]
 
 # User Management Dashboard
 
@@ -89,11 +87,5 @@ To log in as the Super Admin, use the following credentials:
    npm run dev
    ```
 
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

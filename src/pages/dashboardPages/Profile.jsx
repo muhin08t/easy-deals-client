@@ -14,7 +14,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     displayName: "",
     phone: "",
-    photoURL: "",
+    photoUrl: "",
     address: "",
   });
 
@@ -45,7 +45,7 @@ const Profile = () => {
   const handleUpdate = async () => {
     try {
       const updatedUser = {
-        ...user,
+        ...userData,
         displayName: formData.displayName,
         phone: formData.phone,
         photoUrl: formData.photoUrl,
@@ -54,7 +54,7 @@ const Profile = () => {
 
       // Make API call to update user information
       const response = await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${user._id}`,
+        `http://localhost:5000/user/${userData._id}`,
         {
           method: "PUT",
           headers: {
@@ -79,10 +79,10 @@ const Profile = () => {
   // Open the edit modal with the user's current details
   const handleOpenEditModal = () => {
     setFormData({
-      displayName: user.displayName || "",
-      phone: user.phone || "",
-      photoUrl: user.photoUrl || "",
-      address: user.address || "",
+      displayName: userData.displayName || "",
+      phone: userData.phone || "",
+      photoUrl: userData.photoUrl || "",
+      address: userData.address || "",
     });
     setIsEditModalOpen(true);
   };
@@ -200,7 +200,7 @@ const Profile = () => {
               />
             </div>
             <button
-              onClick={handleUpdate}
+              onClick={() => {handleUpdate()}}
               className="bg-blue-500 text-white p-2 rounded mr-2"
             >
               Update

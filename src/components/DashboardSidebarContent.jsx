@@ -7,6 +7,8 @@ import {
   FaEnvelope,
   FaSignOutAlt,
   FaPenAlt,
+  FaList ,
+  FaBox ,
 } from "react-icons/fa";
 
 const DashboardSidebarContent = () => {
@@ -117,6 +119,29 @@ const DashboardSidebarContent = () => {
                         All Users
                       </NavLink>
                       <NavLink
+                        to="/dashboard/allCategories"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-blue-600"
+                            : "text-gray-600 hover:text-blue-500"
+                        }
+                      >
+                        <FaList className="inline mr-2" />
+                        All Category
+                      </NavLink>
+                      <NavLink
+                        to="/dashboard/allProducts"
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-blue-600"
+                            : "text-gray-600 hover:text-blue-500"
+                        }
+                      >
+                        <FaBox className="inline mr-2" />
+                        All Products
+                      </NavLink>
+
+                      <NavLink
                         to="/dashboard/createMessage"
                         className={({ isActive }) =>
                           isActive
@@ -141,6 +166,19 @@ const DashboardSidebarContent = () => {
                     >
                       <FaEnvelope className="inline mr-2" />
                       Messages
+                    </NavLink>
+                  )}
+                  {!userData?.isAdmin && (
+                    <NavLink
+                      to="/dashboard/userProducts"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-blue-600"
+                          : "text-gray-600 hover:text-blue-500"
+                      }
+                    >
+                      <FaBox className="inline mr-2" />
+                      Products
                     </NavLink>
                   )}
                 </>

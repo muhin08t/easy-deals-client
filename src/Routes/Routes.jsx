@@ -21,6 +21,9 @@ import MessageDetails from './../pages/dashboardPages/MessageDetails';
 import CreateMessage from '../pages/dashboardPages/CreateMessage.jsx';
 import DashboardLayout from './../Layout/DashboardLayout';
 import CategoryBasedProducts from '../pages/CategoryBasedProducts.jsx';
+import AllCategories from './../pages/dashboardPages/AllCategories';
+import AllProducts from './../pages/dashboardPages/AllProducts';
+import UserProducts from './../pages/dashboardPages/UserProducts';
 
 const routes = createBrowserRouter([
     {
@@ -90,6 +93,18 @@ const routes = createBrowserRouter([
           {
             path: "allUsers",
             element: <AllUsers />,
+          },
+          {
+            path: "allCategories",
+            element: <AllCategories />,
+          },
+          {
+            path: "allProducts",
+            element: <AllProducts />,
+          },
+          {
+            path: "userProducts",
+            element: <UserProducts />,
           },
           {
             path: "profile",
