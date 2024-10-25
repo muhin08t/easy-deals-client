@@ -24,6 +24,8 @@ import CategoryBasedProducts from '../pages/CategoryBasedProducts.jsx';
 import AllCategories from './../pages/dashboardPages/AllCategories';
 import AllProducts from './../pages/dashboardPages/AllProducts';
 import UserProducts from './../pages/dashboardPages/UserProducts';
+import AddProductUsingReactHookForm from './../pages/AddProductUsingReactHookForm';
+import AddCategory from './../pages/dashboardPages/AddCategory';
 
 const routes = createBrowserRouter([
     {
@@ -105,6 +107,14 @@ const routes = createBrowserRouter([
           {
             path: "userProducts",
             element: <UserProducts />,
+          },
+          {
+            path: "addProducts",
+            element: <AddProductUsingReactHookForm />,
+          },
+          {
+            path: "addCategory",
+            element: <AddCategory />,
           },
           {
             path: "profile",

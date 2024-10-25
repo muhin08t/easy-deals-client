@@ -20,7 +20,7 @@ const ProductDetails = () => {
           useEffect(() => {
             const fetchProduct = async () => {
               try {
-                const response = await fetch(`http://localhost:5000/products/${id}`);
+                const response = await fetch(`https://easy-deals-server.onrender.com/products/${id}`);
                 if (!response.ok) {
                   throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -46,12 +46,15 @@ const ProductDetails = () => {
           return;
         }
         setLoading(true);
+        const priceValue = Number(product.price.replace(/,/g, "")) * quantity;
         const purchaseData = {
           productName: product.name,
+          price: priceValue,
           phone: phone,
           quantity: quantity,
           comment: comment,
           email: user?.email,
+          customerId: user?.uid
         };
 
         try {
@@ -80,6 +83,7 @@ const ProductDetails = () => {
 
         }
       };
+      console.log("product image value "+product.image);
           
     return (
       <div>

@@ -33,9 +33,8 @@ const AllProducts = () => {
     }, []);
     
   
-    const handleClick = (id) => {
-      console.log("handle click called "+id);
-      navigate(`/products/${id}`, { state: { id: id } });
+    const handleClick = () => {
+      navigate(`/dashboard/addProducts`);
     };
 
     return (
@@ -52,7 +51,7 @@ const AllProducts = () => {
           <h1 className="text-2xl inline-block font-bold">All Products</h1>
           <button
               onClick={() => {
-                setIsModalOpen(true)
+                handleClick()
               }}
               className="bg-green-500 hover:bg-green-700 text-white px-4 ml-5 rounded h-10"
             >

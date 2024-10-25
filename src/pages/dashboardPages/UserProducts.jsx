@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrash, FaCreditCard, FaWallet, FaPaypal } from "react-icons/fa";
 import { ImBlocked } from "react-icons/im";
+import { AuthContext } from './../../Provider/AuthProvider';
 
 const UserProducts = () => {
+    const { user } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
@@ -12,7 +14,10 @@ const UserProducts = () => {
     useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await fetch(`https://easy-deals-server.onrender.com/products`);
+          console.log("user id user products "+user.uid);
+          const urllll = `http://localhost:5000//purchase_products/${user.uid}`;
+          console.log("url value in user products "+urllll);
+          const response = await fetch(`http://localhost:5000/purchase_products/${user.uid}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -60,32 +65,18 @@ const UserProducts = () => {
         <thead>
           <tr className="bg-gray-200 text-gray-600 text-left">
             <th className="py-2 px-4 border">#</th>
-            <th className="py-2 px-4 border">Name</th>
-            <th className="py-2 px-4 border">Image</th>
-            <th className="py-2 px-4 border">Actions</th>
+            <th className="py-2 px-4 border">Product Name</th>
+            <th className="py-2 px-4 border">Quantity</th>
+            <th className="py-2 px-4 border">Price</th>
           </tr>
         </thead>
         <tbody>
           {products.map((item, index) => (
             <tr key={item._id} className="hover:bg-gray-100">
               <td className="py-2 px-4 border">{index + 1}</td>
-              <td className="py-2 px-4 border">{item?.name}</td>
-              <td className="py-2 px-4 border">
-                <img
-                  src={item?.image || "https://via.placeholder.com/50"}
-                  alt="user"
-                  className="w-10 rounded-full"
-                />
-              </td>
-              <td className="py-2 px-4 border">
-                <button
-                  onClick={() => openEditModal()}
-                  className="mr-2 p-2 rounded-full size-8 bg-yellow-500 text-white"
-                  title="Payment"
-                >
-                  <FaCreditCard />
-                </button>
-              </td>
+              <td className="py-2 px-4 border">{item?.productName}</td>
+              <td className="py-2 px-4 border">{item?.quantity}</td>
+              <td className="py-2 px-4 border">{item?.price}</td>
             </tr>
           ))}
         </tbody>

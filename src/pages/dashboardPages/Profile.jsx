@@ -69,7 +69,9 @@ const Profile = () => {
       }
 
       // Close the modal upon successful update
+      alert("profile updated successfully!");
       setIsEditModalOpen(false);
+      setUserData(updatedUser);
     } catch (error) {
       console.error("Error updating user:", error);
       alert("There was an error updating the user. Please try again.");

@@ -2,11 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthProvider';
-import Loading from '../../Shared/Loading/Loading';
+import { useTitle } from 'react-use';
 import toast from 'react-hot-toast';
-import useSeller from '../../../hooks/useSeller';
-import useTitle from '../../../hooks/useTitle';
+import { AuthContext } from './../Provider/AuthProvider';
 
 const AddProductUsingReactHookForm = () => {
     const { user } = useContext(AuthContext);
@@ -14,7 +12,8 @@ const AddProductUsingReactHookForm = () => {
     const [categoryObject, setCategoryObject] = useState({});
     const navigate = useNavigate();
     useTitle('Add Product')
-    const imageHostKey = process.env.REACT_APP_imgbb_key;
+    const imageHostKey = import.meta.env.VITE_imgbb_key;
+    console.log("image upload key "+imageHostKey);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {  category: '' }
@@ -23,7 +22,7 @@ const AddProductUsingReactHookForm = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch('https://localhost:5000/categories');
+                const res = await fetch('http://localhost:5000/categories');
                 const data = await res.json();
                 setCategories(data);
 
@@ -60,15 +59,16 @@ const AddProductUsingReactHookForm = () => {
                         categoryId: categoryObject[data.category],
                         category: data.category,
                         image: imgData.data.url,
-                        productName: data.name,
-                        resalePrice: data.resalePrice,
+                        name: data.name,
+                        price: data.resalePrice,
                         postingTime: new Date(),
                         description: data.description,
+                        rating: 4.7,
                         status: 'available',
                     }
 
                     // save product information to the database
-                    fetch('https://localhost:5000/products', {
+                    fetch('http://localhost:5000/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -79,7 +79,7 @@ const AddProductUsingReactHookForm = () => {
                         .then(result => {
                             console.log(result);
                             toast.success(`${data.name} is added successfully`);
-                            navigate('/dashboard/myproducts')
+                            navigate('/dashboard/allProducts')
                         })
                 }
             })
