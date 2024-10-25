@@ -11,7 +11,7 @@ const AddProductUsingReactHookForm = () => {
     const [categories, setCategories] = useState([]);
     const [categoryObject, setCategoryObject] = useState({});
     const navigate = useNavigate();
-    useTitle('Add Product')
+    // useTitle('Add Product')
     const imageHostKey = import.meta.env.VITE_imgbb_key;
     console.log("image upload key "+imageHostKey);
 

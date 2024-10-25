@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const AddCategory = () => {
     const navigate = useNavigate();
-    useTitle('Add Category')
+    // useTitle('Add Category')
     const imageHostKey = import.meta.env.VITE_imgbb_key;
     console.log("image upload key "+imageHostKey);
 
