@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from './../Provider/AuthProvider';
+import { faToggleOn } from '@fortawesome/free-solid-svg-icons';
 import {
   FaUser,
   FaUsers,
@@ -10,6 +11,7 @@ import {
   FaList ,
   FaBox ,
 } from "react-icons/fa";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const DashboardSidebarContent = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -181,6 +183,19 @@ const DashboardSidebarContent = () => {
                       Products
                     </NavLink>
                   )}
+                  {
+                    <NavLink
+                      to="/dashboard/themeSwithcher"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-blue-600"
+                          : "text-gray-600 hover:text-blue-500"
+                      }
+                    >
+                      <FontAwesomeIcon className="inline mr-2" icon={faToggleOn} />
+                      Toggle Theme
+                    </NavLink>
+                  }
                 </>
               )}
               {/* Logout */}

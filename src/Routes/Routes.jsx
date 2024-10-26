@@ -26,6 +26,7 @@ import AllProducts from './../pages/dashboardPages/AllProducts';
 import UserProducts from './../pages/dashboardPages/UserProducts';
 import AddProductUsingReactHookForm from './../pages/AddProductUsingReactHookForm';
 import AddCategory from './../pages/dashboardPages/AddCategory';
+import ThemeSwitcher from './../pages/dashboardPages/ThemeSwitcher';
 
 const routes = createBrowserRouter([
     {
@@ -131,6 +132,10 @@ const routes = createBrowserRouter([
           {
             path: "createMessage",
             element: <CreateMessage />,
+          },
+          {
+            path: "themeSwithcher",
+            element: <ThemeSwitcher />,
           },
         ],
       },
