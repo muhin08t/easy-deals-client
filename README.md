@@ -1,10 +1,9 @@
-# Server side code link: [https://github.com/muhin08t/easy-deals-server.git]
 
-# Client side Live deploy (Render) Link: [https://easy-deals-server.onrender.com/]
+# Client side Live deploy (Netlify) Link: [https://easy-deals-client.netlify.app/]
 
 # User Management Dashboard
 
-This is a full-stack user management dashboard where users can register, log in, view and update their profiles, and where admins can manage users' roles and statuses.
+This is a full-stack user e-commerce site where users can register, log in, view and update their profiles, and where admins can manage users' roles and statuses.
 
 ## Features
 
@@ -14,10 +13,6 @@ This is a full-stack user management dashboard where users can register, log in,
 - **Role-Based Dashboard**:
   - **Admin Dashboard**: Admin users can view all registered users, change their roles (Admin/User), block/unblock users, and monitor system activity.
   - **User Dashboard**: Regular users can view and update their profile details (except email, role, and block status).
-- **Super Admin**:
-  - Email: `super_admin@gmail.com`
-  - Password: `admin123`
-  - The Super Admin role is fixed and cannot be changed. The Super Admin is always active.
 - **Blocked Users**: Blocked users will only see their profile page and the option to log out. They cannot access other features or update their profile details.
 
 ## Key Functionality
@@ -54,11 +49,6 @@ This is a full-stack user management dashboard where users can register, log in,
 - **State Management**: Redux (for handling authentication state and data)
 
 ## Admin Credentials
-
-To log in as the Super Admin, use the following credentials:
-
-- Email: `super-admin@dev-master.com`
-- Password: `admin123`
 
 ## Installation & Setup
 
