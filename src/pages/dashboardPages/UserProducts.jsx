@@ -9,15 +9,13 @@ const UserProducts = () => {
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
+    const [totalSpent, setTotalSpent] = useState(0);
 
 
     useEffect(() => {
       const fetchProducts = async () => {
         try {
-          console.log("user id user products "+user.uid);
-          const urllll = `http://localhost:5000//purchase_products/${user.uid}`;
-          console.log("url value in user products "+urllll);
-          const response = await fetch(`http://localhost:5000/purchase_products/${user.uid}`);
+          const response = await fetch(`https://easy-deals-server.onrender.com/purchase_products/${user.uid}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -37,6 +35,19 @@ const UserProducts = () => {
       fetchProducts();
     }, []);
     
+    const countTotalSpent = () => {
+      let totalSpent = 0; // Initialize totalSpent here to avoid cumulative errors
+      for (let i = 0; i < products.length; i++) {
+        totalSpent += parseInt(products[i]?.price, 10) || 0; // Use || 0 to handle NaN
+      }
+      setTotalSpent(totalSpent);
+    };
+
+    useEffect(() => {
+      countTotalSpent(); // Calculate total spent whenever products change
+    }, [products]); // Dependencies: products
+  
+
   
     const handleClick = (id) => {
       console.log("handle click called "+id);
@@ -58,7 +69,7 @@ const UserProducts = () => {
           <button
               className="bg-green-500 text-white px-4 ml-5 rounded h-10 disabled"
             >
-              Total amount spent : 
+              Total amount spent : {totalSpent}
             </button>
         </div>
         <table className="min-w-96 mx-auto bg-white border">

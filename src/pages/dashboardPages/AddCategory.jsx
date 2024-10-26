@@ -36,7 +36,7 @@ const AddCategory = () => {
                     }
 
                     // save product information to the database
-                    fetch('http://localhost:5000/categories', {
+                    fetch('https://easy-deals-server.onrender.com/categories', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
