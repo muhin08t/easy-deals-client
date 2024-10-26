@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from '../Provider/AuthProvider';
 
 const LoginPage = () => {
     const { signIn, googleSignIn, githubSignIn } = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
 
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
@@ -23,10 +24,12 @@ const LoginPage = () => {
       const email = form.get("email");
       const password = form.get("password");
       console.log(email, password);
+      setIsLoading(true);
   
       signIn(email, password)
         .then((result) => {
           console.log(result.user);
+          setIsLoading(false);
           toast.success("User Login Successful", {
             position: "top-right",
           });
@@ -34,6 +37,7 @@ const LoginPage = () => {
         })
         .catch((error) => {
           console.log(error);
+          setIsLoading(false);
         });
     };
   
@@ -179,6 +183,17 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
+
+        {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
+            <div className="w-1/3 p-4 bg-white rounded shadow">
+              <p className="text-center mb-4">Loading...</p>
+              <div className="flex justify-center">
+                <div className="w-16 h-16 border-8 border-dashed border-blue-500 rounded-full animate-spin"></div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
 };

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Register = () => {
 
     const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(''); 
     const navigate = useNavigate();
   
     const handleRegister = async (event) => {
@@ -24,10 +26,13 @@ const Register = () => {
       const email = form.get("email");
       const password = form.get("password");
       console.log(name, photo, email, password);
+      setIsLoading(true); // Start loading
+      setError(''); // Reset error state
 
       try {
         await createUser(email, password, name, phone, photo, address);
          handleUserProfile(name, photo);
+         setIsLoading(false); // Stop loading
         toast.success("User Registration Successful", {
           position: "top-right",
         });
@@ -35,6 +40,7 @@ const Register = () => {
       } catch (err) {
         setError(err.message); // Capture and display error message
         console.error(err.message);
+        setIsLoading(false); // Stop loading
       }
     };
   
@@ -45,11 +51,12 @@ const Register = () => {
         .then(() => {logOut();})
         .catch((error) => {
           console.log(error);
+          setIsLoading(false); // Stop loading
         });
     };
 
     return (
-        <div className="py-8">
+      <div className="py-8">
         <div className="flex h-full items-center justify-center">
           <div className="rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-900 flex-col flex h-full items-center justify-center sm:px-4">
             <div className="flex h-full flex-col justify-center gap-4 p-6">
@@ -239,6 +246,16 @@ const Register = () => {
             </div>
           </div>
         </div>
+        {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
+            <div className="w-1/3 p-4 bg-white rounded shadow">
+              <p className="text-center mb-4">Loading...</p>
+              <div className="flex justify-center">
+                <div className="w-16 h-16 border-8 border-dashed border-blue-500 rounded-full animate-spin"></div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
 };
