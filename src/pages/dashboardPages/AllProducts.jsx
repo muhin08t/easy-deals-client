@@ -5,33 +5,106 @@ import { ImBlocked } from "react-icons/im";
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState(true);
+    const [formData, setFormData] = useState({
+      name: "",
+      price: "",
+      image: "",
+      rating: "",
+    });
 
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`https://easy-deals-server.onrender.com/products`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProducts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        // Handle error state (optional)
+        setProducts([]);
+        setLoading(false);
+      } finally {
+        setLoading(false); // Ensure loading is set to false even in case of error
+      }
+    };
 
     useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          const response = await fetch(`https://easy-deals-server.onrender.com/products`);
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          const data = await response.json();
-          setProducts(data);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error fetching products:", error);
-          // Handle error state (optional)
-          setProducts([]);
-          setLoading(false);
-        } finally {
-          setLoading(false); // Ensure loading is set to false even in case of error
-        }
-      };
-    
       fetchProducts();
     }, []);
+
+    const openEditModal = (product) => {
+      setSelectedProduct(product);
+      setFormData({
+        name: product.name || "",
+        price: product.price || "",
+        image: product.image || "",
+        rating: product.rating || "",
+      });
+      setIsEditModalOpen(true);
+    };
     
+    const handleClickedDeleteProduct = (product) => {
+      setSelectedProduct(product);
+      setIsDeleteModalOpen(true);
+    };
+
+      // Delete a product
+  const handleDelete = async () => {
+    try {
+      console.log({ selectedProduct });
+
+      await fetch(
+        `https://easy-deals-server.onrender.com/product/${selectedProduct._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+         
+        }
+      );
+      fetchProducts(); // Reload products after update
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
+
+      // Update product info
+  const handleUpdate = async () => {
+    try {
+      const updatedProduct = {
+        ...selectedProduct,
+        name: formData.name,
+        price: formData.price,
+        image: formData.image,
+        rating: formData.rating,
+      };
+
+      await fetch(
+        `https://easy-deals-server.onrender.com/product/${selectedProduct._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProduct),
+        }
+      );
+      fetchProducts(); // Reload users after update
+      setIsEditModalOpen(false);
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
   
     const handleClick = () => {
       navigate(`/dashboard/addProducts`);
@@ -81,16 +154,16 @@ const AllProducts = () => {
               </td>
               <td className="py-2 px-4 border">
                 <button
-                  onClick={() => openEditModal()}
+                  onClick={() => openEditModal(item)}
                   className="mr-2 p-2 rounded-full bg-yellow-500 text-white"
-                  title="Edit User"
+                  title="Edit Proudct"
                 >
                   <FaEdit />
                 </button>
                 <button
-                  onClick={() => openEditModal()}
+                  onClick={() => handleClickedDeleteProduct(item)}
                   className="mr-2 p-2 rounded-full bg-yellow-500 text-white"
-                  title="Edit User"
+                  title="Delete product"
                 >
                   <FaTrash  />
                 </button>
@@ -99,6 +172,94 @@ const AllProducts = () => {
           ))}
         </tbody>
       </table>
+
+            {/* Edit Modal */}
+            {isEditModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg w-1/3">
+            <h3 className="text-xl mb-4">Edit Product</h3>
+            <div className="mb-4">
+              <label className="block text-sm font-medium">Name:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium">Price:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium">Photo URL:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.image}
+                onChange={(e) =>
+                  setFormData({ ...formData, image: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium">Rating:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.rating}
+                onChange={(e) =>
+                  setFormData({ ...formData, rating: e.target.value })
+                }
+              />
+            </div>
+            <button
+              onClick={handleUpdate}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Save Changes
+            </button>
+            <button
+              onClick={() => setIsEditModalOpen(false)}
+              className="bg-red-500 text-white px-4 py-2 rounded ml-4"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+     {/* Delete Modal */}
+     {isDeleteModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg w-1/3">
+            <h3 className="text-xl mb-4">
+              Do you want to delete this product ?
+            </h3>
+            <button
+              onClick={handleDelete}
+              className={`bg-red-500 text-white px-4 py-2 rounded`}
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => setIsDeleteModalOpen(false)}
+              className="bg-gray-500 text-white px-4 py-2 rounded ml-4"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
     );
 };

@@ -13,7 +13,7 @@ const AllUsers = () => {
   const [formData, setFormData] = useState({
     displayName: "",
     phone: "",
-    photoURL: "",
+    photoUrl: "",
     address: "",
   });
 
@@ -47,7 +47,7 @@ const AllUsers = () => {
       console.log({ updatedUser });
 
       await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${selectedUser._id}`,
+        `https://easy-deals-server.onrender.com/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -70,7 +70,7 @@ const AllUsers = () => {
       const updatedUser = { ...selectedUser, isAdmin: !selectedUser?.isAdmin };
 
       await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${selectedUser._id}`,
+        `https://easy-deals-server.onrender.com/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -103,14 +103,14 @@ const AllUsers = () => {
     try {
       const updatedUser = {
         ...selectedUser,
-        displayName: formData.name,
+        displayName: formData.displayName,
         phone: formData.phone,
         photoUrl: formData.photoUrl,
         address: formData.address,
       };
 
       await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${selectedUser._id}`,
+        `https://easy-deals-server.onrender.com/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -189,7 +189,7 @@ const AllUsers = () => {
                       : ""
                   }`}
                   title="Toggle Admin/User"
-                  disabled={user.email === "super-admin@dev-master.com"}
+                  disabled={user.email === "super_admin@gmail.com"}
                 >
                   <FaUserShield />
                 </button>
@@ -209,7 +209,7 @@ const AllUsers = () => {
                       : ""
                   }`}
                   title="Block User"
-                  disabled={user.email === "super-admin@dev-master.com"}
+                  disabled={user.email === "super_admin@gmail.com"}
                 >
                   <ImBlocked />
                 </button>
@@ -229,9 +229,9 @@ const AllUsers = () => {
               <input
                 type="text"
                 className="w-full p-2 border rounded"
-                value={formData.name}
+                value={formData.displayName}
                 onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
+                  setFormData({ ...formData, displayName: e.target.value })
                 }
               />
             </div>
@@ -251,7 +251,7 @@ const AllUsers = () => {
               <input
                 type="text"
                 className="w-full p-2 border rounded"
-                value={formData.photoURL}
+                value={formData.photoUrl}
                 onChange={(e) =>
                   setFormData({ ...formData, photoUrl: e.target.value })
                 }

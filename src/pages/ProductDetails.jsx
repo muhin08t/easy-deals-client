@@ -58,7 +58,7 @@ const ProductDetails = () => {
         };
 
         try {
-          const response = await fetch("http://localhost:5000/purchase", {
+          const response = await fetch("https://easy-deals-server.onrender.com/purchase", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
