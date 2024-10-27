@@ -46,6 +46,7 @@ const ProductDetails = () => {
           return;
         }
         setLoading(true);
+        setIsModalOpen(false);
         const priceValue = Number(product.price.replace(/,/g, "")) * quantity;
         const purchaseData = {
           productName: product.name,
@@ -70,12 +71,12 @@ const ProductDetails = () => {
             throw new Error("Failed to purchase");
           }
 
+          setIsModalOpen(false);
+          setLoading(false);
           alert("parchase product successfully!");
           setComment("");
           setPhone("");
           setQuantity(0);
-          setIsModalOpen(false);
-          setLoading(false);
         } catch (error) {
           console.error("Error purchasing product:", error);
           setLoading(false);
@@ -87,12 +88,14 @@ const ProductDetails = () => {
           
     return (
       <div>
-        {isLoading && (
-          <div className="mx-auto text-center mt-10">
-            <span className="loading loading-spinner loading-xs"></span>
-            <span className="loading loading-spinner loading-sm"></span>
-            <span className="loading loading-spinner loading-md"></span>
-            <span className="loading loading-spinner loading-lg"></span>
+      {isLoading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
+            <div className="w-1/3 p-4 bg-white rounded shadow">
+              <p className="text-center mb-4">Loading...</p>
+              <div className="flex justify-center">
+                <div className="w-16 h-16 border-8 border-dashed border-blue-500 rounded-full animate-spin"></div>
+              </div>
+            </div>
           </div>
         )}
 

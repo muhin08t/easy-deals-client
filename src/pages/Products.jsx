@@ -40,13 +40,15 @@ const Products = () => {
     return (
       <div>
       {isLoading && (
-        <div className="mx-auto text-center mt-10">
-          <span className="loading loading-spinner loading-xs"></span>
-          <span className="loading loading-spinner loading-sm"></span>
-          <span className="loading loading-spinner loading-md"></span>
-          <span className="loading loading-spinner loading-lg"></span>
-        </div>
-      )}
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50 z-50">
+            <div className="w-1/3 p-4 bg-white rounded shadow">
+              <p className="text-center mb-4">Loading...</p>
+              <div className="flex justify-center">
+                <div className="w-16 h-16 border-8 border-dashed border-blue-500 rounded-full animate-spin"></div>
+              </div>
+            </div>
+          </div>
+        )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 m-10">
         {products.map((item, index) => {
